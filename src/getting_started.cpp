@@ -30,18 +30,26 @@ int main() {
         camera.Connect();
         // camera.f().ExposureTime.Set(10000);
 
+        //software trigger
+        // camera.f().TriggerMode = NeoAPI::TriggerMode::On;       // bring camera in TriggerMode
+        // camera.f().TriggerSource = NeoAPI::TriggerSource::Software;
+        // TestNeoImageCallback callback;
+        // camera.EnableImageCallback(callback);                   // enable the callback
+
+        // for (int i = 0; i < 5; i++) 
+        // {
+        //     // send 5 triggers to retrieve some image callbacks
+        //     camera.f().TriggerSoftware.Execute();
+        //     std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        // }
+
+        //hardware trigger
         camera.f().TriggerMode = NeoAPI::TriggerMode::On;       // bring camera in TriggerMode
-        camera.f().TriggerSource = NeoAPI::TriggerSource::Software;
+        camera.f().TriggerSource = NeoAPI::TriggerSource::Line0;
         TestNeoImageCallback callback;
         camera.EnableImageCallback(callback);                   // enable the callback
 
-        for (int i = 0; i < 5; i++) 
-        {
-            // send 5 triggers to retrieve some image callbacks
-            camera.f().TriggerSoftware.Execute();
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        }
-
+        //循环进入回调函数处理图像
         while (1)
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
