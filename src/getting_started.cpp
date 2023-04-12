@@ -16,6 +16,9 @@ public:
             " Timestamp: " << image.GetTimestamp() <<
             " Size: " << image.GetSize() << " Height: " << image.GetHeight() <<
             " Width: " << image.GetWidth() << " PixelFormat: " << image.GetPixelFormat() << std::endl;
+            // image.Save(std::to_string(image.GetTimestamp()).c_str());
+            static int i=0;
+            image.Save(std::to_string(i++).c_str());
     }
 };
 
